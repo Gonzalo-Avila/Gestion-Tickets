@@ -1,0 +1,10 @@
+export enum CategoriaCaso {
+  HARDWARE = 'HARDWARE',
+  SOFTWARE = 'SOFTWARE',
+  MAIL = 'MAIL',
+  SERVIDORES = 'SERVIDORES',
+  IMPRESORAS = 'IMPRESORAS',
+  TELEFONIA = 'TELEFONIA',
+  RED = 'RED',
+  OTRA = 'OTRA'
+}

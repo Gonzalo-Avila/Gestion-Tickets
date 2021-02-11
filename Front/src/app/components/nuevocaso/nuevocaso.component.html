@@ -1,0 +1,58 @@
+<h2>Nuevo caso</h2>
+<br>
+  <div class="mb-3">
+    <label for="cliente" class="form-label">Cliente</label><br>
+    <select class="form-select" aria-label="Cliente" id="cliente"
+            [(ngModel)]="clienteElegido">
+      <option selected value="">Ninguno</option>
+      <option *ngFor="let cliente of clientesDisponibles" value="{{cliente.id}}">{{cliente.razonSocial}}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="prioridad" class="form-label">Prioridad</label><br>
+    <select class="form-select" aria-label="Prioridad" id="prioridad" [(ngModel)]="prioridadElegida">
+      <option *ngFor="let prioridad of prioridadesDisponibles" value="{{prioridad}}"
+              [selected]="prioridad == prioridadElegida">
+        {{prioridad}}
+      </option>
+    </select>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="categoria" class="form-label">Categoría</label><br>
+    <select class="form-select" aria-label="Categoria" id="categoria"
+            [(ngModel)]="categoriaElegida">
+      <option *ngFor="let categoria of categoriasDisponibles" value="{{categoria}}"
+              [selected]="categoria == categoriaElegida">{{categoria}}</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="titulo" class="form-label">Título</label>
+    <input type="email" class="form-control" id="titulo" placeholder="Ingrese titulo del caso"
+           [(ngModel)]="tituloElegido" (input)="camposinvalidos=false">
+    <div [hidden]="!camposinvalidos" style="color: red">Por favor ingresá un título</div>
+  </div>
+
+
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripción</label>
+    <textarea class="form-control" id="descripcion" rows="4"
+              [(ngModel)]="descripcionElegida"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="recurso" class="form-label">Recurso asignado</label><br>
+    <select class="form-select" aria-label="Recurso" id="recurso"
+            [(ngModel)]="usuarioElegido">
+      <option *ngFor="let usuario of usuariosDisponibles; let i = index" value="{{usuario.id}}"
+      [selected]="usuario.id">
+        {{usuario.nombre + ' ' + usuario.apellido}}
+      </option>
+    </select>
+  </div>
+
+  <button class="btn btn-success hBack" type="button" (click)="crearCaso()">Crear</button>
+  <button class="btn btn-danger hBack" type="button" (click)="cancelar()">Cancelar</button>

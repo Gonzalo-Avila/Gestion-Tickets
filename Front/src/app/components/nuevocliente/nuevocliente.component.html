@@ -1,0 +1,36 @@
+<h2>Nuevo cliente</h2>
+<br>
+
+<div class="mb-3">
+  <label for="razonsocial" class="form-label">Razón social</label>
+  <input type="email" class="form-control" id="razonsocial" placeholder="Ingrese razón social del cliente"
+         [(ngModel)]="razonSocialElegida">
+  <div [hidden]="!(camposinvalidos && razonSocialElegida == '')" style="color: red">Por favor ingresá una razón social</div>
+</div>
+
+<div class="mb-3">
+  <label for="direccion" class="form-label">Dirección</label>
+  <input type="email" class="form-control" id="direccion" placeholder="Ingrese la dirección del cliente"
+         [(ngModel)]="direccionElegida">
+</div>
+
+<div class="mb-3">
+  <label for="informacion" class="form-label">Información</label>
+  <textarea class="form-control" id="informacion" rows="4"
+            [(ngModel)]="informacionElegida"></textarea>
+</div>
+
+<div class="mb-3">
+  <label for="encargado" class="form-label">Encargado</label><br>
+  <select class="form-select" aria-label="Encargado" id="encargado"
+          [(ngModel)]="encargadoElegido">
+    <option selected value="">Elegí un contacto</option>
+    <option *ngFor="let contacto of contactosDisponibles" value="{{contacto.id}}">
+      {{contacto.nombre + ' ' + contacto.apellido}}
+    </option>
+  </select>
+  <div [hidden]="!(camposinvalidos && encargadoElegido == '')" style="color: red">Por favor seleccioná un contacto encargado</div>
+</div>
+
+<button class="btn btn-success hBack" type="button" (click)="crearCliente()">Crear</button>
+<button class="btn btn-danger hBack" type="button" (click)="cancelar()" style="margin-left: 20px">Cancelar</button>

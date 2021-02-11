@@ -1,0 +1,12 @@
+body{
+  overflow: hidden;
+  height: 1000px;
+  width: 100%;
+  background-color: #5570ab;
+  background: -moz-linear-gradient(top, #5a83db, #6482c3);
+  background: -ms-linear-gradient(top, #4c6bac, #769ae9);
+  background: -webkit-linear-gradient(top, #5073be, #7696db);
+  border: 1px solid #2b4170;
+  text-shadow: 0 -1px -1px #1f2f52;
+  padding-bottom: 110px ;
+}

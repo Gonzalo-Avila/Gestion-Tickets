@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VAIX</title>
+</head>
+
+<!--<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <img src="../../../assets/logo.png" width="226,5" height="217,25">
+  </a>
+  <i class="bi bi-person-circle" style="font-size: 5rem"></i>
+</nav>-->
+
+<body>
+  <div class="container align-content-lg-center" style="margin-top: 60px; align-content: center">
+    <h1 style="text-align: center">Gestión de tickets</h1>
+    <br>
+    <button class="btn btn-primary btn-lg" style="align-content: center" (click)="redirigirAHome()" [hidden]="true">
+      Home <i class="bi bi-house-door-fill"></i></button>
+    <router-outlet></router-outlet>
+  </div>
+</body>
+
+</html>

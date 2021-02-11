@@ -1,0 +1,37 @@
+<div>
+  <dl class="dl-horizontal">
+    <dt>Caso</dt><dd>{{caso.id}}</dd>
+    <dt>Cliente</dt><dd *ngIf="caso.cliente; else sinCliente">{{caso.cliente.razonSocial}}</dd>
+    <ng-template #sinCliente>-</ng-template>
+    <dt>Fecha apertura</dt><dd>{{caso.fechaApertura | date: 'dd/MM/yy, hh:mm a' }}</dd>
+    <dt>Prioridad</dt><dd>{{caso.prioridad || '-'}}</dd>
+    <dt>Categoria</dt><dd>{{caso.categoria || '-'}}</dd>
+    <dt>Título</dt><dd>{{caso.titulo || '-'}}</dd>
+    <dt>Descripción</dt><dd>{{caso.descripcion || '-'}}</dd>
+    <dt>Recurso asignado</dt><dd *ngIf="caso.usuarioAsignado; else sinTecnico">{{caso.usuarioAsignado.nombre}} {{caso.usuarioAsignado.apellido}}</dd>
+    <ng-template #sinTecnico>-</ng-template>
+    <dt>Estado</dt><dd>{{caso.estado || '-'}}</dd>
+    <div *ngIf="caso.fechaCierre;">
+      <dt>Resolución</dt><dd>{{caso.resolucion || 'Sin detallar'}}</dd>
+      <dt>Fecha cierre</dt><dd>{{caso.fechaCierre | date: 'dd/MM/yy, hh:mm a'}}</dd>
+    </div>
+    <div class="mb-3" [hidden]="!mostrarFormResolucion">
+      <dt>Resolución</dt>
+      <textarea class="form-control" id="formResolucion" rows="4" (input)="cambiarResolucion($event)"></textarea>
+      <button class="btn btn-success hBack" type="button"
+      (click)="cerrarCaso()">Confirmar</button>
+      <button class="btn btn-danger hBack" type="button" style="margin-left: 20px"
+      (click)="mostrarFormResolucion=false">Cancelar</button>
+    </div>
+
+    <button class="btn btn-success hBack" type="button" [hidden]="mostrarFormResolucion || caso.fechaCierre"
+            (click)="mostrarFormResolucion=true">Cerrar caso</button>
+
+    <button class="btn btn-success hBack" type="button" [hidden]="mostrarFormResolucion || !caso.fechaCierre"
+            (click)="reabrirCaso()">Reabrir caso</button>
+
+    <button class="btn btn-primary hBack" type="button" [hidden]="mostrarFormResolucion"
+    style="margin-left: 20px" onclick="history.back()">Volver</button>
+
+  </dl>
+</div>

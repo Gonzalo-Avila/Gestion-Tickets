@@ -1,0 +1,78 @@
+<div style="text-align: center" class="d-grid gap-2">
+  <div>
+    <br>
+    <div class="container" style="padding-bottom: 20px">
+      <div class="row align-items-start">
+
+        <div class="col">
+          <label for="palabraclave" class="form-label" style="padding-right: 10px">Palabra clave</label><br>
+          <input class="mb-2" type="text" placeholder="Buscar por palabra clave" id="palabraclave"
+                 [(ngModel)]="palabraClave">
+        </div>
+
+        <div class="col">
+          <label for="cliente" class="form-label" style="padding-right: 10px">Cliente</label><br>
+          <select class="form-select" aria-label="Cliente" id="cliente"
+                  [(ngModel)]="cliente">
+            <option selected value="">Todos</option>
+            <option *ngFor="let cliente of clientesDisponibles" value="{{cliente.razonSocial}}">{{cliente.razonSocial}}</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="prioridad" class="form-label" style="padding-right: 10px">Prioridad</label><br>
+          <select class="form-select" aria-label="Prioridad" id="prioridad"
+                  [(ngModel)]="prioridad">
+            <option selected value="">Todas</option>
+            <option *ngFor="let prioridad of prioridadesDisponibles" value="{{prioridad}}">{{prioridad}}</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <label for="estado" class="form-label" style="padding-right: 5px">Estado</label><br>
+          <select class="form-select" aria-label="Estado" id="estado"
+                  [(ngModel)]="estado">
+            <option selected value="">Todos</option>
+            <option *ngFor="let estado of estadosDisponibles" value="{{estado}}">{{estado}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-secondary table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Título</th>
+          <th scope="col">Fecha</th>
+          <th scope="col">Prioridad</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Detalle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--tr *ngFor="let caso of casosFiltrados() | appFiltroCasos : filtro"-->
+        <tr *ngFor="let caso of casosFiltrados()" (click)="redirigirACaso(caso.id)">
+          <th scope="col">{{caso.id}}</th>
+          <th scope="col" *ngIf="caso.cliente; else mostrarSlash">{{caso.cliente.razonSocial}}</th>
+          <th scope="col">{{caso.titulo || '-'}}</th>
+          <th scope="col">{{caso.fechaApertura | date: 'dd/MM/yy, hh:mm a'}}</th>
+          <th scope="col">{{caso.prioridad}}</th>
+          <th scope="col" *ngIf="caso.usuarioAsignado; else mostrarSlash">
+            {{caso.usuarioAsignado.nombre + ' ' + caso.usuarioAsignado.apellido}}
+          </th>
+          <th scope="col">{{caso.estado || '-'}}</th>
+          <th scope="col"><a href="/casos/{{caso.id}}">
+            <i class="bi bi-arrow-bar-right"></i></a>
+          </th>
+
+          <ng-template #mostrarSlash><th>{{'-'}}</th></ng-template>
+        </tr>
+      </tbody>
+    </table>
+
+    <button class="btn btn-success hBack" type="button" (click)="nuevoCaso()">Nuevo caso</button>
+    <button class="btn btn-primary hBack" type="button" (click)="redirigirAHome()" style="margin-left: 20px">Volver</button>
+  </div>
+</div>

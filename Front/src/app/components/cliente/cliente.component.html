@@ -1,0 +1,41 @@
+<div>
+  <dl class="dl-horizontal">
+    <dt>Cliente</dt><dd>{{cliente.id}} - {{cliente.razonSocial}}</dd>
+    <dt>Dirección</dt><dd>{{cliente.direccion || '-'}}</dd>
+    <dt>Encargado</dt>
+    <dd *ngIf="cliente.encargado; else mostrarSlash">
+      {{cliente.encargado.nombre}} {{cliente.encargado.apellido}}
+    </dd>
+
+    <dt style="padding-bottom: 10px">Contactos</dt>
+    <dd>
+      <div *ngIf="cliente.contactos.length > 0; else mostrarSlash" style="text-align: center" class="d-grid gap-2">
+        <table class="table table-secondary table-hover">
+          <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Detalle</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let contacto of cliente.contactos" (click)="redirigirAContacto(contacto.id)">
+            <th scope="col">{{contacto.nombre + ' ' + contacto.apellido || '-'}}</th>
+            <th scope="col">{{contacto.email || '-'}}</th>
+            <th scope="col">{{contacto.telefono || '-'}}</th>
+            <th scope="col"><a href="contactos/{{contacto.id}}"><i class="bi bi-arrow-bar-right"></i></a></th>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </dd>
+
+    <ng-template #mostrarSlash>-</ng-template>
+
+    <br>
+    <button class="btn btn-primary hBack" type="button">Guardar cambios</button>
+    <button class="btn btn-primary hBack" type="button" style="margin-left: 20px" onclick="history.back()">Volver</button>
+
+  </dl>
+</div>
