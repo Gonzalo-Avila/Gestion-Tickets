@@ -1,1 +1,5 @@
-# Gestion-Tickets
+Tecnologías:
+
+* JAVA (Spring).
+* Angular.
+* SQL Server.
